@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Tengah::class, function (Faker $faker) {
+$factory->define(App\About::class, function (Faker $faker) {
     return [
         //
     ];

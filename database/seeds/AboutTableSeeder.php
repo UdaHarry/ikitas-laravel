@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TengahTableSeeder extends Seeder
+class AboutTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
