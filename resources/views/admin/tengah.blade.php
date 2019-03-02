@@ -145,10 +145,10 @@
 @endsection
 
 @section('tinymce')
-  <script src="{{ asset('adm-vendor/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+  <script src="{{ asset('scAdmin/tinymce/js/tinymce/tinymce.min.js') }}"></script>
   <script type="text/javascript">
     tinymce.init({
-      selector: 'textarea#inner-textarea',  // change this value according to your HTML
+      selector: 'textarea#about-text',  // change this value according to your HTML
       menubar: false,
       plugins: [
       'advlist autolink link lists charmap preview hr anchor pagebreak spellchecker',
