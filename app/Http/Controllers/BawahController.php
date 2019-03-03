@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Bawah;
+use Validator;
 
 class BawahController extends Controller
 {
@@ -23,10 +24,24 @@ class BawahController extends Controller
         echo json_encode($bawah);
     }
 
+
     public function update(Request $request, $id)
     {
+        // $validator = Validator::make($request->all(), [
+        //     'maps'      => 'required',
+        //     'email'     => 'required|email',
+        //     'telepon'   => 'required|min:5|max:13',
+        //     'handphone' => 'required|min:8|max:13',
+        //     'whatsapp'  => 'required|min:8|max:13',
+        // ]);
+
+        // if($validator->fails()){
+        //     alert("Tidak dapat menyimpan data!");
+        // }else{
         $bawah = Bawah::find($id);
         $bawah->update($request->all());
-        return redirect('/adm-bawah');
+        // return response()->json();
+        // return response()->json()->with(['success' => 'Update Berhasil..!']);
+        // return redirect('/adm-bawah')->with(['success' => 'Update Berhasil..!']);
     }
 }

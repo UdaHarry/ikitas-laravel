@@ -13,9 +13,23 @@
         <div class="row">
           <!-- Area Landing-->
           <div class="col-lg-6 col-md-6">
-            <form method="POST" enctype="multipart/form-data" action="/adm-bawah/1/update">
+            <!-- <form method="POST" enctype="multipart/form-data" action="/adm-bawah/1/update"> -->
+            <form id="form-update" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="card mb-3">
+                <!-- pesan data berhasil di simpan -->
+                <div class="alert alert-danger alert-dismissible" style="display:none">
+                  <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+                  <i class="icon fa fa-check"></i>
+                  Perubahan berhasil disimpan.
+                </div>
+
+                <div class="alert alert-success alert-dismissible" style="display:none">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <i class="icon fa fa-check"></i>
+                  Perubahan berhasil disimpan.
+                </div>
+
                 <!-- card header -->
                 <div class="card-header">
                   <i class="fas fa-address-book"></i>
@@ -97,6 +111,28 @@
 
       showData();
       $('#nav-bawah').addClass('active');
+
+      $('#form-update').on('submit', function(e){
+             e.preventDefault();
+             $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+             $.ajax({
+               type : "POST",
+               url : "/adm-bawah/1/update",
+               data : $(this).serialize(),
+               success : function(data){
+                 showData();
+                 $('.alert-danger').css('display', 'block').delay(2000).fadeOut();
+               },
+               error : function(){
+                 alert("Tidak dapat menyimpan data!");
+               }   
+             });
+             return false;
+      });
     });
 
     function showData(){
