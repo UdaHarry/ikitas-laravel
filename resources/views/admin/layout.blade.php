@@ -71,7 +71,7 @@
           <span>Layout Tengah</span></a>
       </li>
       <li class="nav-item" id="nav-bawah">
-        <a class="nav-link" href="{{route('adm-bawah')}}">
+        <a class="nav-link" href="{{route('adm-bawah.index')}}">
           <i class="fas fa-fw fa-arrow-down"></i>
           <span>Layout Bawah</span></a>
       </li>

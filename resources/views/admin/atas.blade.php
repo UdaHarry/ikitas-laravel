@@ -189,4 +189,5 @@
       $('#nav-atas').addClass('active');
     });
   </script>
+  
 @endsection

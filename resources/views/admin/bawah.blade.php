@@ -13,7 +13,7 @@
         <div class="row">
           <!-- Area Landing-->
           <div class="col-lg-6 col-md-6">
-            <form method="POST" enctype="multipart/form-data" action="">
+            <form method="POST" enctype="multipart/form-data" action="/adm-bawah/1/update">
               @csrf
               <div class="card mb-3">
                 <!-- card header -->
@@ -26,14 +26,14 @@
                 <!-- card body -->
                 <div class="card-body">
                   <h4>Location</h4>
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.960448395582!2d110.38979251477349!3d-7.013934494933549!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b08ecae27d3%3A0xbca7db646419b713!2sIKITAS+3+Menoreh!5e0!3m2!1sid!2sid!4v1551026062580" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  <iframe id="prev-maps" src="" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
 
                   <!-- update text -->
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-map-marked"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="maps">
+                    <input id="maps" type="text" class="form-control" name="maps">
                   </div>
                   <!-- update text -->
                   
@@ -43,7 +43,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                     </div>
-                    <input type="email" class="form-control" name="email">
+                    <input id="email" type="email" class="form-control" name="email">
                   </div>
                   <!-- update text -->
                   
@@ -52,7 +52,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
-                    <input type="tel" class="form-control" name="telepon">
+                    <input id="telepon" type="tel" class="form-control" name="telepon">
                   </div>
                   <!-- update text -->
 
@@ -61,7 +61,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                     </div>
-                    <input type="tel" class="form-control" name="handphone">
+                    <input id="handphone" type="tel" class="form-control" name="handphone">
                   </div>
                   <!-- update text -->
 
@@ -70,7 +70,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
                     </div>
-                    <input type="tel" class="form-control" name="whatsapp">
+                    <input id="whatsapp" type="tel" class="form-control" name="whatsapp">
                   </div>
                   <!-- update text -->
 
@@ -93,15 +93,30 @@
 
 @section('script')
   <script type="text/javascript">
-    $(document).ready(function(){
+    $(function(){
+
+      showData();
       $('#nav-bawah').addClass('active');
     });
+
+    function showData(){
+      $.ajax({
+        url : "adm-bawah/1/edit",
+        type : "GET",
+        dataType : "JSON",
+        success : function(data){
+          $('#prev-maps').attr('src',data.maps);
+          $('#maps').val(data.maps);
+          $('#email').val(data.email);
+          $('#telepon').val(data.telepon);
+          $('#handphone').val(data.hp);
+          $('#whatsapp').val(data.whatsapp);
+        },
+        error : function(){
+          alert("Tidak dapat menyimpan data!");
+        }   
+      });
+    }
   </script>
-  <script type="application/javascript">
-    $('input[type="file"]').change(function(e){
-        var fileName = e.target.files[0].name;
-        $('.custom-file-label').html(fileName);
-    });
-</script>
 @endsection
 
