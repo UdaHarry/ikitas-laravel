@@ -11,6 +11,6 @@ class TengahTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Tengah::class, 3)->create();
     }
 }

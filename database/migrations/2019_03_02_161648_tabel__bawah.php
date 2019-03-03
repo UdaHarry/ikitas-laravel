@@ -15,7 +15,7 @@ class TabelBawah extends Migration
     {
         Schema::create('tabel_bawah',function(Blueprint $table){
             $table->increments('id');
-            $table->string('maps');
+            $table->text('maps');
             $table->string('email');
             $table->string('telepon');
             $table->string('hp');

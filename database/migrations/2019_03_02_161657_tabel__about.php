@@ -16,7 +16,7 @@ class TabelAbout extends Migration
         Schema::create('tabel_about',function(Blueprint $table){
             $table->increments('id');
             $table->string('headline');
-            $table->text('email');
+            $table->text('deskripsi');
             $table->string('gambar');
             $table->timestamps();
         });

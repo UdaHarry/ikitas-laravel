@@ -11,6 +11,6 @@ class AtasTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Atas::class, 3)->create();
     }
 }
