@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\About;
 
 class TengahController extends Controller
 {
@@ -56,7 +57,8 @@ class TengahController extends Controller
      */
     public function edit($id)
     {
-        //
+        $about = About::find($id);
+        echo json_encode($about);
     }
 
     /**
@@ -68,7 +70,13 @@ class TengahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->input('about-head'));
+        $about = About::find($id);
+        // $about->update($request->all());
+        $about->headline    = $request['about-head'];
+        // $about->deskripsi   = $request['deskripsi'];
+        // $about->gambar      = $request['gambar'];
+        $about->update();
     }
 
     /**

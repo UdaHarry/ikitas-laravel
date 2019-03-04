@@ -9,7 +9,17 @@
         <h5>Layout Tengah</h5>
     </div>
   </div>
+<div class="alert alert-success alert-dismissible" style="display:none">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <i class="icon fa fa-check"></i>
+                  Perubahan berhasil disimpan.
+                </div>
 
+                <div class="alert alert-danger alert-dismissible" style="display:none">
+                  <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+                  <i class="icon fa fa-check"></i>
+                  Perubahan gagal disimpan.
+                </div>
   <!-- Area Chart Example-->
   <div class="card mb-3">
     <div class="card-header">
@@ -17,16 +27,16 @@
       About
     </div>
     <div class="card-body">
-
-    <form method="POST" enctype="multipart/form-data" action="">
+    <!-- <form id="about-update" method="POST" enctype="multipart/form-data" action="/adm-tengah/1/update"> -->
+    <form id="about-update" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="row">
         <!-- kiri -->
         <div class="col-md-6">
           <!-- preview image -->
           <div class="row">
-            <div class="mx-auto">
-              <img src="{{ asset('/img/workingspace.png')}}" alt="" class="img-fluid" >
+            <div class="mx-auto prev-about">
+              <!-- <img src="{{ asset('/img/workingspace.png')}}" alt="" class="img-fluid" > -->
             </div>
           </div>
           <!-- preview image -->
@@ -153,7 +163,7 @@
       plugins: [
       'advlist autolink link lists charmap preview hr anchor pagebreak spellchecker',
       'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime nonbreaking',
-      'save table contextmenu directionality emoticons template paste textcolor'
+      'save table directionality emoticons template paste'
       ],
       content_css: 'css/content.css',
       toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
@@ -164,8 +174,47 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function(){
+      showData();
       $('#nav-tengah').addClass('active');
+
+      $('#about-update').on('submit', function(e){
+             e.preventDefault();
+             $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+             $.ajax({
+               type : "POST",
+               url : "/adm-tengah/1/update",
+               data : $(this).serialize(),
+               success : function(data){
+                 showData();
+                 $('.alert-success').css('display', 'block').delay(2000).fadeOut();
+               },
+               error : function(){
+                 $('.alert-danger').css('display', 'block').delay(2000).fadeOut();
+               }   
+             });
+             return false;
+      });
     });
+
+    function showData(){
+      $.ajax({
+        url : "adm-tengah/1/edit",
+        type : "GET",
+        dataType : "JSON",
+        success : function(data){
+          $('.prev-about').html('<img src="img/'+data.gambar+'" alt="" class="img-fluid" >');
+          $('#about-head').val(data.headline);
+          $('#about-text').val(data.deskripsi);
+        },
+        error : function(){
+          alert("Tidak dapat menyimpan data!");
+        }   
+      });
+    }
   </script>
 
   <script type="application/javascript">

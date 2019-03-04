@@ -66,7 +66,7 @@
         </a>
       </li>
       <li class="nav-item" id="nav-tengah">
-        <a class="nav-link" href="{{ route('adm-tengah')}}">
+        <a class="nav-link" href="{{ route('adm-tengah.index')}}">
           <i class="fas fa-fw fa-arrows-alt-h"></i>
           <span>Layout Tengah</span></a>
       </li>

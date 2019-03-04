@@ -8,5 +8,5 @@ class About extends Model
 {
      protected $table = 'tabel_about';
      protected $primaryKey = 'id';
-     protected $fillable = ['headline', 'deskripsi', 'gambar'];
+     // protected $fillable = ['headline', 'deskripsi', 'gambar'];
 }

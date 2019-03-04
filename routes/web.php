@@ -15,7 +15,9 @@ Route::get('/','FrontController@index')->name('laman-depan');
 
 Route::group(['middleware'=>['auth']],function(){
 	Route::get('/adm','AtasController@index')->name('adm');
-	Route::get('/adm-tengah','TengahController@index')->name('adm-tengah');
+
+	Route::resource('/adm-tengah','TengahController');
+	Route::post('/adm-tengah/{id_about}/update','TengahController@update');
 
 	Route::resource('/adm-bawah','BawahController');
 	Route::post('/adm-bawah/{id}/update','BawahController@update');
