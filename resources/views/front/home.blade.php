@@ -57,15 +57,17 @@
 
     <!-- Bagian Tengah -->
     <div class="content">
-
+      
+      @foreach($landing as $land)
 			<!-- Jumbotron landing image -->
-			<div class="jumbotron jumbotron-fluid">
+			<div class="jumbotron jumbotron-fluid" style="background-image: url('{{ asset('storage/'.$land->gambar)}}');">
 			  <div class="container">
-					<h1 class="display-4">Make your own Website <br> <span>Faster</span> and <span>Better</span> <br> With US</h1>
+					<h1 class="display-4">@php echo $land->text1; @endphp</h1>
 					<a href="" class="btn btn-primary btn-sm tombol">Get Started</a>
 			  </div>
 			</div>
 			<!-- Jumbotron landing image -->
+      @endforeach
 
 			<!-- feature -->
 				<div class="container">
@@ -114,22 +116,24 @@
             </div>
           </div>
           <div class="row">
+            @foreach($about as $abt)
             <!-- single-well start-->
             <div class="col-md-6 col-sm-6 col-xs-12">
               <a href="#">
-                <img src="img/workingspace.png" alt="" class="img-fluid" >
+                <img src="{{ asset('storage/'.$abt->gambar)}}" alt="" class="img-fluid" >
               </a>
             </div>
             <!-- single-well end-->
             <div class="col-md-6 col-sm-6 col-xs-12">
               <a href="#">
-                <h4 class="sec-head">project Maintenance</h4>
+                <h4 class="sec-head">{{$abt->headline}}</h4>
               </a>
               <p>
-                Redug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure aspernatur sit adipisci quaerat unde at nequeRedug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure
+                @php echo $abt->deskripsi; @endphp
               </p>
               <a href="" class="btn btn-primary btn-sm tombol" style="color: #FFF;">Selengkapnya..</a>
             </div>
+            @endforeach
             <!-- End col-->
           </div>
         </div>
@@ -204,18 +208,20 @@
           </div>
 
           <div class="row">
+            @foreach($bawah as $bwh)
             <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                 <h4>Contact</h4>
-                <p><i class="fas fa-envelope"></i> ikitas.tutorial@gmail.com</p>
-                <p><i class="fas fa-phone"></i> (021)1234-8765</p>
-                <p><i class="fas fa-mobile-alt"></i> 0852 1234 4567</p>
-                <p><i class="fab fa-whatsapp"></i> 0852 1234 4567</p>
+                <p><i class="fas fa-envelope"></i> {{$bwh->email}}</p>
+                <p><i class="fas fa-phone"></i> {{$bwh->telepon}}</p>
+                <p><i class="fas fa-mobile-alt"></i> {{$bwh->hp}}</p>
+                <p><i class="fab fa-whatsapp"></i> {{$bwh->whatsapp}}</p>
             </div>
 
             <div class="col-md-8 col-sm-6 col-xs-12">
               <h4><i class="fas fa-map"></i> Lokasi</h4>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.960448395582!2d110.38979251477349!3d-7.013934494933549!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b08ecae27d3%3A0xbca7db646419b713!2sIKITAS+3+Menoreh!5e0!3m2!1sid!2sid!4v1551026062580" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <iframe src="{{$bwh->maps}}" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
+            @endforeach
           </div>
           
         </div>

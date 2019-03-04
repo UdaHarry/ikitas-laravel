@@ -9,17 +9,14 @@
         <h5>Layout Tengah</h5>
     </div>
   </div>
-<div class="alert alert-success alert-dismissible" style="display:none">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <i class="icon fa fa-check"></i>
-                  Perubahan berhasil disimpan.
-                </div>
 
-                <div class="alert alert-danger alert-dismissible" style="display:none">
-                  <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-                  <i class="icon fa fa-check"></i>
-                  Perubahan gagal disimpan.
-                </div>
+  @if(session('sukses'))
+  <div class="alert alert-success a" role="alert">
+    <i class="icon fa fa-check"></i>
+    {{session('sukses')}}
+  </div>
+  @endif
+
   <!-- Area Chart Example-->
   <div class="card mb-3">
     <div class="card-header">
@@ -27,8 +24,7 @@
       About
     </div>
     <div class="card-body">
-    <!-- <form id="about-update" method="POST" enctype="multipart/form-data" action="/adm-tengah/1/update"> -->
-    <form id="about-update" method="POST" enctype="multipart/form-data">
+    <form id="about-update" method="POST" enctype="multipart/form-data" action="/adm-tengah/1/updateAbout">
       @csrf
       <div class="row">
         <!-- kiri -->
@@ -36,7 +32,7 @@
           <!-- preview image -->
           <div class="row">
             <div class="mx-auto prev-about">
-              <!-- <img src="{{ asset('/img/workingspace.png')}}" alt="" class="img-fluid" > -->
+              <!-- img di replace di sini-->
             </div>
           </div>
           <!-- preview image -->
@@ -174,39 +170,21 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function(){
-      showData();
       $('#nav-tengah').addClass('active');
 
-      $('#about-update').on('submit', function(e){
-             e.preventDefault();
-             $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-              });
-             $.ajax({
-               type : "POST",
-               url : "/adm-tengah/1/update",
-               data : $(this).serialize(),
-               success : function(data){
-                 showData();
-                 $('.alert-success').css('display', 'block').delay(2000).fadeOut();
-               },
-               error : function(){
-                 $('.alert-danger').css('display', 'block').delay(2000).fadeOut();
-               }   
-             });
-             return false;
-      });
+      setTimeout(function(){
+       $("div.alert").remove();
+      }, 5000 );
+      showData();
     });
 
     function showData(){
       $.ajax({
-        url : "adm-tengah/1/edit",
+        url : "adm-tengah/1/editAbout",
         type : "GET",
         dataType : "JSON",
         success : function(data){
-          $('.prev-about').html('<img src="img/'+data.gambar+'" alt="" class="img-fluid" >');
+          $('.prev-about').html('<img src="storage/'+data.gambar+'" alt="" class="img-fluid" >');
           $('#about-head').val(data.headline);
           $('#about-text').val(data.deskripsi);
         },

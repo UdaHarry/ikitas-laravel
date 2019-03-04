@@ -9,11 +9,18 @@
       <h5>Layout Atas</h5>
     </div>
   </div>
-        
+
+  @if(session('sukses'))
+  <div class="alert alert-success a" role="alert">
+    <i class="icon fa fa-check"></i>
+    {{session('sukses')}}
+  </div>
+  @endif
+
   <div class="row">
     <!-- Area Landing-->
     <div class="col-lg-6 col-md-6">
-      <form method="POST" enctype="multipart/form-data" action="">
+      <form method="POST" enctype="multipart/form-data" action="adm/1/update">
         @csrf
         <div class="card mb-3">
           <!-- card header -->
@@ -26,21 +33,22 @@
           <!-- card body -->
           <div class="card-body">
             <!-- preview image -->
-            <img src="{{ asset('/img/jumbotron-bg.jpg')}}" alt="" class="img-fluid">
-
+            <div class="prev-fitur">
+              <!-- Isi Gambar Fitur -->
+            </div>
             <!-- upload gambar -->
             <div class="form-group">
               <div class="custom-file">
                   <label for="up-image">Landing Image</label>
-                  <input id="up-image" class="form-control" type="file" name="landing_img">
+                  <input id="up-image" class="form-control" type="file" name="up-image">
               </div>
             </div>
             <!-- upload gambar -->
 
             <!-- update text -->
             <div class="form-group">
-              <label for="up-text">Text Image, <b><span style="font-size: 10px;">agar text bold/tebal gunakan < b >{Tex_Bold}< / b > seperti tag html biasa</span></b> </label>
-              <input id="up-text" class="form-control" type="text" name="text_img" maxlength="50" placeholder="50 Character Maksimal ">
+              <label for="up-text">Text Image, <b><span style="font-size: 10px;">agar text bold/tebal gunakan < span >{Tex_Bold}< / span > seperti tag html biasa</span></b> </label>
+              <input id="up-text" class="form-control" type="text" name="up-text" placeholder="50 Character Maksimal ">
             </div>
             <!-- update text -->
             
@@ -186,8 +194,28 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function(){
+      showData();
       $('#nav-atas').addClass('active');
+
+      setTimeout(function(){
+       $("div.alert").remove();
+      }, 5000 );
+
     });
+    function showData(){
+      $.ajax({
+        url : "adm/1/edit",
+        type : "GET",
+        dataType : "JSON",
+        success : function(data){
+          $('.prev-fitur').html('<img src="storage/'+data.gambar+'" alt="" class="img-fluid" >');
+          $('#up-text').val(data.text1);
+        },
+        error : function(){
+          alert("Tidak dapat menyimpan data!");
+        }   
+      });
+    }
   </script>
   
 @endsection

@@ -13,8 +13,7 @@
         <div class="row">
           <!-- Area Landing-->
           <div class="col-lg-6 col-md-6">
-            <form method="POST" enctype="multipart/form-data" action="/adm-bawah/1/update">
-            <!-- <form id="form-update" method="POST" enctype="multipart/form-data"> -->
+            <form id="form-update" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="card mb-3">
 
@@ -26,7 +25,6 @@
                 </div>
 
                 <div class="alert alert-danger alert-dismissible" style="display:none">
-                  <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
                   <i class="icon fa fa-check"></i>
                   Perubahan gagal disimpan.
                 </div>
@@ -76,7 +74,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                     </div>
-                    <input id="handphone" type="tel" class="form-control" name="handphone">
+                    <input id="hp" type="tel" class="form-control" name="hp">
                   </div>
                   <!-- update text -->
 
@@ -113,27 +111,27 @@
       showData();
       $('#nav-bawah').addClass('active');
 
-      // $('#form-update').on('submit', function(e){
-      //        e.preventDefault();
-      //        $.ajaxSetup({
-      //             headers: {
-      //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      //             }
-      //         });
-      //        $.ajax({
-      //          type : "POST",
-      //          url : "/adm-bawah/1/update",
-      //          data : $(this).serialize(),
-      //          success : function(data){
-      //            showData();
-      //            $('.alert-success').css('display', 'block').delay(2000).fadeOut();
-      //          },
-      //          error : function(){
-      //            $('.alert-danger').css('display', 'block').delay(2000).fadeOut();
-      //          }   
-      //        });
-      //        return false;
-      // });
+      $('#form-update').on('submit', function(e){
+             e.preventDefault();
+             $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+             $.ajax({
+               type : "POST",
+               url : "/adm-bawah/1/update",
+               data : $(this).serialize(),
+               success : function(data){
+                 showData();
+                 $('.alert-success').css('display', 'block').delay(2000).fadeOut();
+               },
+               error : function(){
+                 $('.alert-danger').css('display', 'block').delay(2000).fadeOut();
+               }   
+             });
+             return false;
+      });
     });
 
     function showData(){
@@ -146,7 +144,7 @@
           $('#maps').val(data.maps);
           $('#email').val(data.email);
           $('#telepon').val(data.telepon);
-          $('#handphone').val(data.hp);
+          $('#hp').val(data.hp);
           $('#whatsapp').val(data.whatsapp);
         },
         error : function(){
