@@ -17,17 +17,18 @@
             <form id="form-update" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="card mb-3">
-                <!-- pesan data berhasil di simpan -->
-                <div class="alert alert-danger alert-dismissible" style="display:none">
-                  <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-                  <i class="icon fa fa-check"></i>
-                  Perubahan berhasil disimpan.
-                </div>
+
 
                 <div class="alert alert-success alert-dismissible" style="display:none">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <i class="icon fa fa-check"></i>
                   Perubahan berhasil disimpan.
+                </div>
+
+                <div class="alert alert-danger alert-dismissible" style="display:none">
+                  <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+                  <i class="icon fa fa-check"></i>
+                  Perubahan gagal disimpan.
                 </div>
 
                 <!-- card header -->
@@ -75,7 +76,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                     </div>
-                    <input id="handphone" type="tel" class="form-control" name="handphone">
+                    <input id="hp" type="tel" class="form-control" name="hp">
                   </div>
                   <!-- update text -->
 
@@ -125,10 +126,10 @@
                data : $(this).serialize(),
                success : function(data){
                  showData();
-                 $('.alert-danger').css('display', 'block').delay(2000).fadeOut();
+                 $('.alert-success').css('display', 'block').delay(2000).fadeOut();
                },
                error : function(){
-                 alert("Tidak dapat menyimpan data!");
+                 $('.alert-danger').css('display', 'block').delay(2000).fadeOut();
                }   
              });
              return false;
@@ -145,7 +146,7 @@
           $('#maps').val(data.maps);
           $('#email').val(data.email);
           $('#telepon').val(data.telepon);
-          $('#handphone').val(data.hp);
+          $('#hp').val(data.hp);
           $('#whatsapp').val(data.whatsapp);
         },
         error : function(){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Bawah;
 
 class FrontController extends Controller
 {
@@ -12,8 +13,9 @@ class FrontController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('front.home');
+    {   
+        $data['bawah'] = Bawah::where('id','=','1')->get();
+        return view('front.home',$data);
     }
 
     /**
