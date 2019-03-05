@@ -26,6 +26,6 @@ class AtasController extends Controller
         }
         $atas->text1    = $request['up-text'];
         $atas->update();
-        return redirect('adm')->with('sukses', 'Update Suksess');
+        return redirect('adm.index')->with('sukses', 'Update Suksess');
     }
 }

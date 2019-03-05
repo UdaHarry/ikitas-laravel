@@ -14,7 +14,7 @@ Auth::routes();
 Route::get('/','FrontController@index')->name('laman-depan');
 
 Route::group(['middleware'=>['auth']],function(){
-	Route::resource('/adm','AtasController');
+	Route::get('/adm','AtasController@index')->name('adm');
 	Route::get('/adm/{id}/edit','AtasController@edit');
 	Route::post('/adm/{id}/update','AtasController@update');
 

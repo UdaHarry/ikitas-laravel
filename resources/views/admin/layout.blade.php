@@ -60,7 +60,7 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item" id="nav-atas">
-        <a class="nav-link" href="{{ route('adm.index') }}">
+        <a class="nav-link" href="{{ route('adm') }}">
           <i class="fas fa-fw fa-arrow-up"></i>
           <span>Layout Atas</span>
         </a>
