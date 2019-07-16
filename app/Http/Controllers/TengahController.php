@@ -37,6 +37,6 @@ class TengahController extends Controller
         $about->headline    = $request['about-head'];
         $about->deskripsi   = $request['about-text'];
         $about->update();
-        return redirect('adm-tengah.index')->with('sukses', 'Update Suksess');
+        return redirect('adm-tengah')->with('sukses', 'Update Suksess');
     }
 }

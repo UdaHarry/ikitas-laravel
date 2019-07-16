@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         	AtasTableSeeder::class,
         	TengahTableSeeder::class,
         	BawahTableSeeder::class,
-        	AboutTableSeeder::class,
+            AboutTableSeeder::class,
+            UsersTableSeeder::class
         ]);
     }
 }
